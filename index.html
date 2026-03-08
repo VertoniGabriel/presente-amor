@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para JuhLinda</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts - Playfair Display -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background-color: #000000;
+      }
+
+      body {
+        font-family: "Lora", serif;
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .playfair {
+        font-family: "Playfair Display", serif;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000000;
+      }
+
+      .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          ),
+          url("https://images.unsplash.com/photo-1599599810694-b5ac4dd19f10?w=1600&h=1200&fit=crop&q=80&sat=-100");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: clamp(4rem, 12vw, 8rem);
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        animation: fadeInUp 1.2s ease-out;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: #e8e8e8;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-weight: 300;
+        animation: fadeInUp 1.5s ease-out 0.3s both;
+      }
+
+      .hero-julia {
+        font-size: clamp(1.4rem, 5vw, 2.2rem);
+        color: #ffffff;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        font-weight: 600;
+        animation: fadeInUp 1.8s ease-out 0.6s both;
+        margin-top: 2rem;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* CAROUSEL SECTION */
+      .carousel-fullscreen {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        background-color: #000000;
+      }
+
+      .carousel-slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-slide-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-size: cover;
+        background-position: center;
+        transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .carousel-slide-item.active {
+        opacity: 1;
+      }
+
+      .carousel-controls {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 20;
+      }
+
+      .carousel-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: all 0.4s ease;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+
+      .carousel-dot.active {
+        background-color: #ffffff;
+        transform: scale(1.4);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+      }
+
+      .carousel-dot:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* SPOTIFY SECTION */
+      .spotify-section {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000000;
+        padding: 80px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .spotify-container {
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 600;
+        color: #ffffff;
+        text-align: center;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 60px;
+      }
+
+      .spotify-card {
+        background-color: #0a0a0a;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow:
+          0 0 60px rgba(255, 255, 255, 0.15),
+          inset 0 0 60px rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.6s ease;
+      }
+
+      .spotify-card:hover {
+        box-shadow:
+          0 0 80px rgba(255, 255, 255, 0.25),
+          inset 0 0 80px rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .disco-cover {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 30px;
+        aspect-ratio: 1;
+        border-radius: 16px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.8),
+          0 0 40px rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .disco-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .spotify-embed-wrapper {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .spotify-embed-wrapper iframe {
+        width: 100%;
+        max-width: 380px;
+        height: 380px;
+        border-radius: 12px;
+      }
+
+      /* MESSAGE SECTION */
+      .message-section {
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      .message-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .message-title:hover {
+        color: #e8e8e8;
+        letter-spacing: 2px;
+      }
+
+      .message-text {
+        font-size: 1.1rem;
+        color: #e8e8e8;
+        line-height: 1.8;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        max-width: 500px;
+        margin: 0 auto 10px;
+      }
+
+      .message-text:hover {
+        color: #ffffff;
+      }
+
+      .message-date {
+        font-size: 0.95rem;
+        color: #999999;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .message-date:hover {
+        color: #e8e8e8;
+      }
+
+      /* ROMANTIC SECTION */
+      .romantic-section {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000000;
+        padding: 80px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .romantic-container {
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .romantic-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 600;
+        color: #ffffff;
+        text-align: center;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .romantic-title::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffffff, transparent);
+      }
+
+      .romantic-text {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        color: #e8e8e8;
+        line-height: 2;
+        margin-top: 60px;
+        letter-spacing: 0.5px;
+      }
+
+      .romantic-text p {
+        margin-bottom: 30px;
+      }
+
+      .romantic-text strong {
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      .romantic-emphasis {
+        display: inline-block;
+        margin-top: 40px;
+        font-style: italic;
+        color: #d0d0d0;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+      }
+      .footer {
+        background-color: #0a0a0a;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 40px 20px;
+        text-align: center;
+        color: #999999;
+        font-size: 0.95rem;
+      }
+
+      .footer p {
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .hero-bg {
+          background-attachment: scroll;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .spotify-card {
+          padding: 30px;
+        }
+
+        .section-title {
+          margin-bottom: 40px;
+        }
+
+        .disco-cover {
+          max-width: 250px;
+        }
+
+        .message-text {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 3rem;
+        }
+
+        .spotify-card {
+          padding: 20px;
+          border-radius: 16px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+          margin-bottom: 30px;
+        }
+
+        .disco-cover {
+          max-width: 220px;
+          margin-bottom: 20px;
+        }
+
+        .spotify-embed-wrapper iframe {
+          max-width: 100%;
+          height: 300px;
+        }
+      }
+
+      /* Loading animation */
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      .loading {
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="bg-black">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title playfair">Para Você</h1>
+        <p class="hero-subtitle">Com Todo Meu Amor</p>
+        <p class="hero-julia">Julia</p>
+      </div>
+    </section>
+
+    <!-- CAROUSEL SECTION -->
+    <section
+      class="carousel-fullscreen"
+      data-aos="fade-in"
+      data-aos-duration="1000"
+    >
+      <div class="carousel-slides" id="carouselSlides">
+        <!-- Slide 1 - Foto Casamento -->
+        <div
+          class="carousel-slide-item active"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/d/1XySXcH9A6I-wGW_SbOGYg8ZZqgrJ1y5k=w1600&quot;);
+          "
+        ></div>
+
+        <!-- Slide 2 - Foto Praia -->
+        <div
+          class="carousel-slide-item"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/d/1YfExt9OXRgKGNif5Se7wP9KsNgLVV2rD=w1600&quot;);
+          "
+        ></div>
+
+        <!-- Slide 3 - Foto Preferida -->
+        <div
+          class="carousel-slide-item"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/d/1QSg1xzZ0KUcuTU0yuc7D5wJKRwQft2Gr=w1600&quot;);
+          "
+        ></div>
+
+        <!-- Slide 4 - Foto Shopping -->
+        <div
+          class="carousel-slide-item"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/d/1bEnYpw-SdpO4J3_f76_T_GSPIUNLBeAv=w1600&quot;);
+          "
+        ></div>
+
+        <!-- Slide 5 - Foto Viagem -->
+        <div
+          class="carousel-slide-item"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/d/1vn60wI5eK25VwudsAix98gV5dFqvqmlq=w1600&quot;);
+          "
+        ></div>
+      </div>
+
+      <div class="carousel-controls">
+        <div class="carousel-dot active" data-slide="0"></div>
+        <div class="carousel-dot" data-slide="1"></div>
+        <div class="carousel-dot" data-slide="2"></div>
+        <div class="carousel-dot" data-slide="3"></div>
+        <div class="carousel-dot" data-slide="4"></div>
+      </div>
+    </section>
+
+    <!-- SPOTIFY SECTION -->
+    <section
+      class="spotify-section"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-offset="300"
+    >
+      <div class="spotify-container">
+        <h2 class="section-title playfair">Nossa Música</h2>
+
+        <div
+          class="spotify-card"
+          data-aos="zoom-in"
+          data-aos-duration="800"
+          data-aos-delay="200"
+        >
+          <!-- Disco Cover (Edite a URL no código para trocar a imagem) -->
+          <div class="disco-cover">
+            <img
+              src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&h=500&fit=crop&q=80&sat=-100"
+              alt="Capa da Música"
+            />
+          </div>
+
+          <!-- Spotify Embed (Cole o iframe do Spotify dentro da div abaixo, no código fonte) -->
+          <div class="spotify-embed-wrapper">
+            <iframe
+              style="border-radius: 12px"
+              src="https://open.spotify.com/embed/track/0o9zmvc5f3EFApU52PPIyW?utm_source=generator"
+              width="100%"
+              height="352"
+              frameborder="0"
+              allowfullscreen=""
+              allow="
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                fullscreen;
+                picture-in-picture;
+              "
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- Message Section -->
+        <div
+          class="message-section"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay="400"
+        >
+          <h3
+            class="message-title playfair"
+            id="messageTitle"
+            onclick="editMessage()"
+            title="Clique para editar"
+          >
+            Uma Data Especial
+          </h3>
+          <p
+            class="message-text"
+            id="messageText"
+            onclick="editMessage()"
+            title="Clique para editar"
+          >
+            Clique aqui para adicionar uma mensagem especial
+          </p>
+          <p
+            class="message-date"
+            id="messageDate"
+            onclick="editDate()"
+            title="Clique para editar"
+          >
+            Clique aqui para adicionar uma data
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROMANTIC SECTION -->
+    <section
+      class="romantic-section"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-offset="300"
+    >
+      <div class="romantic-container">
+        <h2 class="romantic-title playfair">Por Que Você É Especial</h2>
+
+        <div
+          class="romantic-text"
+          data-aos="fade-up"
+          data-aos-duration="1200"
+          data-aos-delay="300"
+        >
+          <p>
+            Você não é apenas alguém na minha vida. Você é
+            <strong>o motivo</strong> pelo qual meus dias ganham cor,
+            significado e propósito.
+          </p>
+
+          <p>
+            Em cada momento ao seu lado, sinto que descobri algo que procurava
+            sem saber: <strong>paz, alegria e amor verdadeiro</strong>. Seu
+            sorriso ilumina as minhas manhãs mais escuras, e sua presença torna
+            qualquer momento especial.
+          </p>
+
+          <p>
+            Você me inspira a ser uma pessoa melhor, a sonhar maior e a
+            acreditar que algumas coisas na vida valem cada segundo. A forma
+            como você vê o mundo, sua bondade, sua força e sua delicadeza me
+            fazem ter certeza de que encontrei meu lugar.
+          </p>
+
+          <p>
+            Este presente é pequeno perto do quanto você significa para mim, mas
+            é um reflexo dos meus sentimentos:
+            <strong>profundos, puros e infinitos</strong>.
+          </p>
+
+          <div class="romantic-emphasis">
+            ❤ Obrigado por ser você, por estar comigo e por tornar minha vida
+            <strong>extraordinária</strong>. ❤
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" data-aos="fade-up" data-aos-duration="800">
+      <p>Feito com Amor ❤ para Alguém Muito Especial</p>
+    </footer>
+
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        offset: 100,
+        easing: "ease-in-out",
+        once: false,
+      });
+
+      // CAROUSEL FUNCTIONALITY
+      class FullscreenCarousel {
+        constructor() {
+          this.slides = document.querySelectorAll(".carousel-slide-item");
+          this.dots = document.querySelectorAll(".carousel-dot");
+          this.currentIndex = 0;
+          this.slideInterval = 5000; // Exactly 5 seconds
+          this.init();
+        }
+
+        init() {
+          this.startAutoPlay();
+          this.dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+              this.goToSlide(index);
+            });
+          });
+        }
+
+        goToSlide(index) {
+          this.currentIndex = index;
+          this.updateSlide();
+          this.resetAutoPlay();
+        }
+
+        nextSlide() {
+          this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+          this.updateSlide();
+        }
+
+        updateSlide() {
+          this.slides.forEach((slide, index) => {
+            slide.classList.remove("active");
+            this.dots[index].classList.remove("active");
+          });
+
+          this.slides[this.currentIndex].classList.add("active");
+          this.dots[this.currentIndex].classList.add("active");
+        }
+
+        startAutoPlay() {
+          this.autoPlayInterval = setInterval(
+            () => this.nextSlide(),
+            this.slideInterval,
+          );
+        }
+
+        resetAutoPlay() {
+          clearInterval(this.autoPlayInterval);
+          this.startAutoPlay();
+        }
+      }
+
+      // Initialize carousel
+      const carousel = new FullscreenCarousel();
+
+      // MESSAGE EDITING
+      function editMessage() {
+        const currentText = document.getElementById("messageText").textContent;
+        const newText = prompt("Escreva sua mensagem especial:", currentText);
+        if (newText && newText.trim()) {
+          document.getElementById("messageText").textContent = newText;
+        }
+      }
+
+      function editDate() {
+        const currentDate = document.getElementById("messageDate").textContent;
+        const newDate = prompt("Escreva a data ou frase:", currentDate);
+        if (newDate && newDate.trim()) {
+          document.getElementById("messageDate").textContent = newDate;
+        }
+      }
+
+      // Smooth scroll to sections
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+
+      // Trigger AOS refresh on scroll
+      window.addEventListener("scroll", () => {
+        AOS.refresh();
+      });
+
+      // SPOTIFY PLAYER CONTROLS
+      let isLooping = false;
+      let isPlaying = false;
+
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const loopBtn = document.getElementById("loopBtn");
+      const spotifyPlayer = document.getElementById("spotifyPlayer");
+
+      playPauseBtn.addEventListener("click", function () {
+        if (isPlaying) {
+          // Pausa
+          isPlaying = false;
+          playPauseBtn.textContent = "▶ Play";
+          // O embed do Spotify não permite controle direto, então vamos mostrar uma mensagem
+          playPauseBtn.style.opacity = "0.7";
+        } else {
+          // Play
+          isPlaying = true;
+          playPauseBtn.textContent = "⏸ Pause";
+          playPauseBtn.style.opacity = "1";
+        }
+      });
+
+      loopBtn.addEventListener("click", function () {
+        isLooping = !isLooping;
+        if (isLooping) {
+          loopBtn.textContent = "🔁 Loop: ON";
+          loopBtn.style.background = "rgba(255, 255, 255, 0.6)";
+          loopBtn.style.borderColor = "rgba(255, 255, 255, 1)";
+        } else {
+          loopBtn.textContent = "🔁 Loop: OFF";
+          loopBtn.style.background = "rgba(255, 255, 255, 0.3)";
+          loopBtn.style.borderColor = "rgba(255, 255, 255, 0.5)";
+        }
+      });
+    </script>
+  </body>
+</html>
